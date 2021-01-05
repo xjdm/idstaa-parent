@@ -26,7 +26,7 @@ public class BlackListFilter implements GlobalFilter, Ordered {
     // 模拟黑名单（实际可以从数据库或者redis中查询）
     private static List<String> blackList = new ArrayList<>();
     static {
-        blackList.add("0:0:0:0:0:0:0:1"); // 模拟本机地址
+        // blackList.add("0:0:0:0:0:0:0:1"); // 模拟本机地址
     }
     /**
      * 过滤器核心方法

@@ -44,6 +44,9 @@ logging:
     level:
         # Feign⽇志只会对⽇志级别为debug的做出响应
         com.idstaa.controller.service.ResumeServiceFeignClient: debug
+        #分布式链路追踪
+        org.springframework.web.servlet.DispatcherServlet: debug
+        org.springframework.cloud.sleuth: debug
 # 开启feign熔断功能
 feign:
     hystrix:
