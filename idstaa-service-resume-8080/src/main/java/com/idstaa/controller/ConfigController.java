@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/config")
 @RefreshScope
 public class ConfigController {
-    /*@Value("${idstaa.message}")
+    @Value("${idstaa.message}")
     private String idstaaMessage;
     @Value("${mysql.url}")
     private String mysqlUrl;
@@ -24,7 +24,7 @@ public class ConfigController {
     @GetMapping("/viewconfig")
     public String viewConfig(){
         return "idstaaMessage==>"+idstaaMessage +"mysqlUrl-->"+mysqlUrl;
-    }*/
+    }
 
 
 }

@@ -22,6 +22,8 @@
         <module>idstaa-cloud-stream-producer-9090</module>
         <module>idstaa-cloud-stream-consumer-9091</module>
         <module>idstaa-cloud-stream-consumer-9093</module>
+        <module>idstaa-cloud-zipkin-server-9411</module>
+        <module>idstaa-cloud-oauth-server-9999</module>
     </modules>
     <!--⽗⼯程打包⽅式为pom-->
     <packaging>pom</packaging>

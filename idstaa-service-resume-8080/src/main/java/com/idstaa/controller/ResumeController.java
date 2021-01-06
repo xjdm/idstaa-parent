@@ -21,11 +21,11 @@ public class ResumeController {
     @GetMapping(value = "/openstate/{userId}",produces = { "application/json;charset=UTF-8"})
     public  Integer findDefaultResumeState(@PathVariable Long userId){
         // 模拟处理超时
-        try{
+       /* try{
             Thread.sleep(10000);
         }catch (InterruptedException e) {
             e.printStackTrace();
-        }
+        }*/
         //return resumeService.findDefaultResumeByUserId(userId).getIsOpenResume();
         return port;
     }

@@ -1,0 +1,17 @@
+package com.idstaa;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+
+/**
+ * @author chenjie
+ * @date 2021/1/6 10:41
+ */
+@SpringBootApplication
+@EnableDiscoveryClient
+public class OauthServerApplication9999 {
+    public static void main(String[] args) {
+        SpringApplication.run(OauthServerApplication9999.class,args);
+    }
+}
