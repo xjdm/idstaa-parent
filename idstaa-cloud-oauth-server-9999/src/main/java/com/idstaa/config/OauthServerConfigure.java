@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.jwt.crypto.sign.MacSigner;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
@@ -13,6 +14,8 @@ import org.springframework.security.oauth2.provider.token.AuthorizationServerTok
 import org.springframework.security.oauth2.provider.token.DefaultTokenServices;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.InMemoryTokenStore;
+import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
+import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 
 /**
  * @author chenjie
@@ -73,7 +76,7 @@ public class OauthServerConfigure extends AuthorizationServerConfigurerAdapter {
         endpoints.tokenStore(tokenStore())  // 指定token的存储方式
                 .tokenServices(authorizationServerTokenServices())    // token的服务的一个描述，可以认为是token生成细节的描述，比如有效时间多少等
                 .authenticationManager(authenticationManager) //指定认证管理器，随后注入一到当前类即可
-                .allowedTokenEndpointRequestMethods(HttpMethod.GET, HttpMethod.POST);
+                .allowedTokenEndpointRequestMethods(HttpMethod.GET, HttpMethod.POST,HttpMethod.TRACE);
 
     }
 
@@ -82,7 +85,21 @@ public class OauthServerConfigure extends AuthorizationServerConfigurerAdapter {
      * token以什么形式存储
      */
     public TokenStore tokenStore() {
-        return new InMemoryTokenStore();
+        // return new InMemoryTokenStore();
+        return new JwtTokenStore(jwtAccessTokenConverter());
+    }
+
+    private String sign_key = "idstaaidstaa";
+    /**
+     * 返回jwt令牌转换器（帮助我们⽣成jwt令牌的）
+     * 在这⾥，我们可以把签名密钥传递进去给转换器对象
+     * @return
+     */
+    public JwtAccessTokenConverter jwtAccessTokenConverter(){
+        JwtAccessTokenConverter jwtAccessTokenConverter = new JwtAccessTokenConverter();
+        jwtAccessTokenConverter.setSigningKey(sign_key); // 签名密钥
+        jwtAccessTokenConverter.setVerifier(new MacSigner(sign_key)); // 签名密钥
+        return jwtAccessTokenConverter;
     }
 
     /**
@@ -93,6 +110,7 @@ public class OauthServerConfigure extends AuthorizationServerConfigurerAdapter {
         DefaultTokenServices defaultTokenServices = new DefaultTokenServices();
         defaultTokenServices.setSupportRefreshToken(true); // 是否开启令牌刷新
         defaultTokenServices.setTokenStore(tokenStore());
+        defaultTokenServices.setTokenEnhancer(jwtAccessTokenConverter());
         // 设置令牌有效时间
         defaultTokenServices.setAccessTokenValiditySeconds(2000);//access_token就是我们请求资源需要携带的令牌
         // 设置刷新令牌的有效时间
