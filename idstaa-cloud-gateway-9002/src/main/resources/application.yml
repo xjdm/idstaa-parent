@@ -23,13 +23,21 @@ spring:
         - id: service-resume-router      # 我们自定义的路由 ID，保持唯一
           #uri: http://127.0.0.1:8081       # 目标服务地址
           #http://localhost:9002/resume/openstate/1545132
-
           #http://127.0.0.1:8081/openstate/1545132
           uri: lb://idstaa-service-resume
           predicates:                                         # 断言：路由条件，Predicate 接受一个输入参数，返回一个布尔值结果。该接口包含多种默 认方法来将 Predicate 组合成其他复杂的逻辑（比如：与，或，非）。
             - Path=/resume/**
           #filters:
           #  - StripPrefix=1 # 可以去掉resume之后转发
+        - id: service-oauth-router      # 我们自定义的路由 ID，保持唯一
+          #uri: http://127.0.0.1:8081       # 目标服务地址
+          #http://localhost:9002/resume/openstate/1545132
+          #http://127.0.0.1:8081/openstate/1545132
+          uri: lb://idstaa-cloud-oauth-server
+          predicates:                                         # 断言：路由条件，Predicate 接受一个输入参数，返回一个布尔值结果。该接口包含多种默 认方法来将 Predicate 组合成其他复杂的逻辑（比如：与，或，非）。
+            - Path=/oauth/**
+        #filters:
+        #  - StripPrefix=1 # 可以去掉resume之后转发
   zipkin:
       base-url: http://127.0.0.1:9411 # zipkin server的请求地址
       sender:
