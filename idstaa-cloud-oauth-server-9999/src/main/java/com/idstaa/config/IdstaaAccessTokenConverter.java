@@ -16,7 +16,7 @@ import java.util.Map;
  * @date 2021/1/6 23:10
  */
 @Component
-public class IdstaaAccessTokenConvertor extends DefaultAccessTokenConverter {
+public class IdstaaAccessTokenConverter extends DefaultAccessTokenConverter {
     @Override
     public Map<String, ?> convertAccessToken(OAuth2AccessToken token, OAuth2Authentication authentication) {
         // 获取到对象

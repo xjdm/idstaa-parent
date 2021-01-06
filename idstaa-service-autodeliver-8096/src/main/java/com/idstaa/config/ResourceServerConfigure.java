@@ -1,5 +1,6 @@
 package com.idstaa.config;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -21,6 +22,8 @@ import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 @EnableResourceServer // 开启资源服务器功能
 @EnableWebSecurity // 开启web访问安全
 public class ResourceServerConfigure extends ResourceServerConfigurerAdapter {
+    @Autowired
+    private IdstaaAccessTokenConverter idstaaAccessTokenConverter;
 
     /**
      * 改方法用于创建tokenStore对象（令牌存储对象）
@@ -41,6 +44,7 @@ public class ResourceServerConfigure extends ResourceServerConfigurerAdapter {
         JwtAccessTokenConverter jwtAccessTokenConverter = new JwtAccessTokenConverter();
         jwtAccessTokenConverter.setSigningKey(sign_key); // 签名密钥
         jwtAccessTokenConverter.setVerifier(new MacSigner(sign_key)); // 签名密钥
+        jwtAccessTokenConverter.setAccessTokenConverter(idstaaAccessTokenConverter);
         return jwtAccessTokenConverter;
     }
 
