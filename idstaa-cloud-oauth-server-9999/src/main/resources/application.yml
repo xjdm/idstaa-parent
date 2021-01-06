@@ -14,6 +14,16 @@ Spring:
         # 采样率 1 代表100%全部采集 ，默认0.1 代表10% 的请求踪迹数据会被采 集
         # ⽣产环境下，请求量⾮常⼤，没有必要所有请求的踪迹数据都采集分析，对于⽹络包括server端压⼒都是⽐较⼤的，可以配置采样率采集⼀定⽐例的请求的踪迹数据进⾏分析即可
                 probability: 1
+    datasource:
+        driver-class-name: com.mysql.jdbc.Driver
+        url: jdbc:mysql://localhost:3306/oauth?useUnicode=true&characterEncoding=utf-8&useSSL=false&allowMultiQueries=true&serverTimezone=UTC
+        username: root
+        password: root
+    druid:
+        initialSize: 10
+        minIdle: 10
+        maxActive: 30
+        maxWait: 50000
 eureka:
     client:
         serviceUrl: # eureka server的路径

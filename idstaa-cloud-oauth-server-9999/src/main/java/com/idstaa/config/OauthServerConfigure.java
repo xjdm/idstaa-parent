@@ -1,21 +1,26 @@
 package com.idstaa.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.jwt.crypto.sign.MacSigner;
+import org.springframework.security.oauth2.client.token.JdbcClientTokenServices;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
+import org.springframework.security.oauth2.provider.client.JdbcClientDetailsService;
 import org.springframework.security.oauth2.provider.token.AuthorizationServerTokenServices;
 import org.springframework.security.oauth2.provider.token.DefaultTokenServices;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.InMemoryTokenStore;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
+
+import javax.sql.DataSource;
 
 /**
  * @author chenjie
@@ -27,6 +32,9 @@ import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 public class OauthServerConfigure extends AuthorizationServerConfigurerAdapter {
     @Autowired
     private AuthenticationManager authenticationManager;
+
+    @Autowired
+    private DataSource dataSource;
 
     @Override
     public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
@@ -53,14 +61,22 @@ public class OauthServerConfigure extends AuthorizationServerConfigurerAdapter {
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
         super.configure(clients);
-        clients.inMemory() // 客户端信息存储在什么地方，可以在内存中，可以再数据库里
+        /*clients.inMemory() // 客户端信息存储在什么地方，可以在内存中，可以再数据库里
                 .withClient("client_idstaa")// 添加一个client配置，指定其client_id
                 .secret("abcxyz") // 指定客户端的密码/安全码
                 .resourceIds("autoDeliver")// 指定客户端所能访问资源id清单，此处的资源id是需要在具体的资源服务器上也配置一样
                 // 认证类型/令牌颁发模式，可以配置多个在这里，但是不一定都用，具体使用哪种方式颁发token，需要客户端调用的时候传递的参数指定
                 .authorizedGrantTypes("password", "refresh_token")
                 // 客户端的权限范围，此处配置为all全部即可
-                .scopes("all");
+                .scopes("all");*/
+        // 从数据库中加载客户端详情
+        clients.withClientDetails(createJdbcClientDetailsService());
+    }
+
+    @Bean
+    public JdbcClientDetailsService createJdbcClientDetailsService(){
+        JdbcClientDetailsService jdbcClientDetailsService = new JdbcClientDetailsService(dataSource);
+        return jdbcClientDetailsService;
     }
 
     /**

@@ -1,5 +1,6 @@
 package com.idstaa.config;
 
+import com.idstaa.service.JdbcUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.cglib.proxy.NoOp;
@@ -25,6 +26,9 @@ public class SecurityConfigure extends WebSecurityConfigurerAdapter {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    @Autowired
+    private JdbcUserDetailsService jdbcUserDetailsService;
+
     /**
      * 注册一个认证管理器对象到容器
      */
@@ -44,9 +48,10 @@ public class SecurityConfigure extends WebSecurityConfigurerAdapter {
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         // 在这个方法中就可以去关联数据了，当前我们先把用户信息配置在内存中
         // 实例化一个用户对象(相当于数据表中的一条数据)
-        UserDetails user = new User("admin","123456",new ArrayList<>());
+/*        UserDetails user = new User("admin","123456",new ArrayList<>());
         auth.inMemoryAuthentication()
-                .withUser(user).passwordEncoder(passwordEncoder);
+                .withUser(user).passwordEncoder(passwordEncoder);*/
+        auth.userDetailsService(jdbcUserDetailsService).passwordEncoder(passwordEncoder);
     }
 
     /**
