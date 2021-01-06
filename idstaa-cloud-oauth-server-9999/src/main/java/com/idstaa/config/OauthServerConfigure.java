@@ -32,6 +32,8 @@ import javax.sql.DataSource;
 public class OauthServerConfigure extends AuthorizationServerConfigurerAdapter {
     @Autowired
     private AuthenticationManager authenticationManager;
+    @Autowired
+    private IdstaaAccessTokenConvertor idstaaAccessTokenConvertor;
 
     @Autowired
     private DataSource dataSource;
@@ -115,6 +117,7 @@ public class OauthServerConfigure extends AuthorizationServerConfigurerAdapter {
         JwtAccessTokenConverter jwtAccessTokenConverter = new JwtAccessTokenConverter();
         jwtAccessTokenConverter.setSigningKey(sign_key); // 签名密钥
         jwtAccessTokenConverter.setVerifier(new MacSigner(sign_key)); // 签名密钥
+        jwtAccessTokenConverter.setAccessTokenConverter(idstaaAccessTokenConvertor);
         return jwtAccessTokenConverter;
     }
 
