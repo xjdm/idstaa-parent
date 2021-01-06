@@ -53,7 +53,7 @@ public class OauthServerConfigure extends AuthorizationServerConfigurerAdapter {
         clients.inMemory() // 客户端信息存储在什么地方，可以在内存中，可以再数据库里
                 .withClient("client_idstaa")// 添加一个client配置，指定其client_id
                 .secret("abcxyz") // 指定客户端的密码/安全码
-                .resourceIds("autodeliver")// 指定客户端所能访问资源id清单，此处的资源id是需要在具体的资源服务器上也配置一样
+                .resourceIds("autoDeliver")// 指定客户端所能访问资源id清单，此处的资源id是需要在具体的资源服务器上也配置一样
                 // 认证类型/令牌颁发模式，可以配置多个在这里，但是不一定都用，具体使用哪种方式颁发token，需要客户端调用的时候传递的参数指定
                 .authorizedGrantTypes("password", "refresh_token")
                 // 客户端的权限范围，此处配置为all全部即可
@@ -94,7 +94,7 @@ public class OauthServerConfigure extends AuthorizationServerConfigurerAdapter {
         defaultTokenServices.setSupportRefreshToken(true); // 是否开启令牌刷新
         defaultTokenServices.setTokenStore(tokenStore());
         // 设置令牌有效时间
-        defaultTokenServices.setAccessTokenValiditySeconds(20);//access_token就是我们请求资源需要携带的令牌
+        defaultTokenServices.setAccessTokenValiditySeconds(2000);//access_token就是我们请求资源需要携带的令牌
         // 设置刷新令牌的有效时间
         defaultTokenServices.setRefreshTokenValiditySeconds(3 * 24 * 3600);//3天
         return defaultTokenServices;

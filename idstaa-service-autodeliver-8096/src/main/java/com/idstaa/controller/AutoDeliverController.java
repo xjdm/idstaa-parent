@@ -17,7 +17,7 @@ public class AutoDeliverController {
     @Autowired
     private ResumeServiceFeignClient resumeServiceFeignClient;
 
-    @GetMapping("/checkState/{userId}")
+    @GetMapping(value = "/checkState/{userId}",produces = { "application/json;charset=UTF-8"})
     public Integer findResumeOpenState(@PathVariable Long userId) {
             /*String url = "http://idstaa-service-resume/resume/openstate/" + userId;
             Integer forObject = restTemplate.getForObject(url, Integer.class);
