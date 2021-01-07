@@ -11,12 +11,14 @@
         <module>idstaa-service-common</module>
         <module>idstaa-service-resume-8080</module>
         <module>idstaa-service-resume-8081</module>
+        <module>idstaa-service-resume-8082-nacos</module>
         <module>idstaa-service-autodeliver-8090</module>
         <module>idstaa-service-autodeliver-8091</module>
         <module>idstaa-cloud-eureka-server-8761</module>
         <module>idstaa-cloud-hystrix-dashboard-9000</module>
         <module>idstaa-cloud-hystrix-turbine-9001</module>
         <module>idstaa-service-autodeliver-8096</module>
+        <module>idstaa-service-autodeliver-8097-nacos</module>
          <module>idstaa-cloud-configserver-9006</module>
         <module>idstaa-cloud-eureka-server-8762</module>
         <module>idstaa-cloud-stream-producer-9090</module>
@@ -42,7 +44,17 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+
+            <!--SCA -->
+            <dependency>
+                <groupId>com.alibaba.cloud</groupId>
+                <artifactId>spring-cloud-alibaba-dependencies</artifactId>
+                <version>2.1.0.RELEASE</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
         </dependencies>
+        <!--SCA -->
     </dependencyManagement>
 
     <dependencies>
@@ -135,10 +147,10 @@
                 </configuration>
             </plugin>
             <!--打包插件-->
-            <plugin>
+<!--            <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
+            </plugin>-->
         </plugins>
     </build>
 </project>
