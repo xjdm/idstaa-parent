@@ -10,7 +10,7 @@ spring:
           server-addr: 192.168.31.100:8848
           cluster-name: BJ
           #指定当前实例注册到的命名空间，不同的命名空间是隔离的，其中的服务不能互相掉用
-          #namespace: 567c2aaa-a99d-415d-b430-f6333197254e
+          #namespace: d80e4457-1263-4482-8715-0bd7f19836e5
     #过滤掉eureka
     autoconfigure:
       exclude: org.springframework.cloud.netflix.eureka.EurekaClientAutoConfiguration
