@@ -12,6 +12,7 @@
         <module>idstaa-service-resume-8080</module>
         <module>idstaa-service-resume-8081</module>
         <module>idstaa-service-resume-8082-nacos</module>
+        <module>idstaa-service-resume-8083-nacos</module>
         <module>idstaa-service-autodeliver-8090</module>
         <module>idstaa-service-autodeliver-8091</module>
         <module>idstaa-cloud-eureka-server-8761</module>

@@ -1,5 +1,5 @@
 server:
-  port: 8082
+  port: 8083
 spring:
   application:
     name: idstaa-service-resume
@@ -20,21 +20,9 @@ spring:
       discovery:
         ################ 配置nacos server地址
         server-addr: 192.168.31.100:8848
-        namespace: d80e4457-1263-4482-8715-0bd7f19836e5
-      config:
-        server-addr: 192.168.31.100:8848
-        namespace: d80e4457-1263-4482-8715-0bd7f19836e5 #命名空间
-        group: DEFAULT_GROUP #默认分组就是DEFAULT_GROUP
-        dataid: idstaa-service-resume.yaml
-        file-extension: yaml #扩展名
-        ext-config[0]:
-          data-id: abc.yaml
-          group: dev
-          refresh: true #开启扩展dataId的动态刷新
-        ext-config[1]:
-          data-id: def.yaml
-          group: dev
-          refresh: true
+        cluster-name: BJ
+        #指定当前实例注册到的命名空间，不同的命名空间是隔离的，其中的服务不能互相掉用
+        namespace: 567c2aaa-a99d-415d-b430-f6333197254e
   #过滤掉eureka
   autoconfigure:
     exclude: org.springframework.cloud.netflix.eureka.EurekaClientAutoConfiguration
