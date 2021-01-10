@@ -19,11 +19,11 @@ spring:
     nacos:
       discovery:
         ################ 配置nacos server地址
-        server-addr: 192.168.31.100:8848
-        namespace: d80e4457-1263-4482-8715-0bd7f19836e5
+        server-addr: nacos.idstaa.com:8848
+        #namespace: d80e4457-1263-4482-8715-0bd7f19836e5
       config:
-        server-addr: 192.168.31.100:8848
-        namespace: d80e4457-1263-4482-8715-0bd7f19836e5 #命名空间
+        server-addr: nacos.idstaa.com:8848
+        #namespace: d80e4457-1263-4482-8715-0bd7f19836e5 #命名空间
         group: DEFAULT_GROUP #默认分组就是DEFAULT_GROUP
         dataid: idstaa-service-resume.yaml
         file-extension: yaml #扩展名
