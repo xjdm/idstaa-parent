@@ -1,7 +1,7 @@
 package com.idstaa.controller;
 
 import com.alibaba.csp.sentinel.annotation.SentinelResource;
-import com.alibaba.csp.sentinel.slots.block.BlockException;
+import com.idstaa.config.SentinelHandlersClass;
 import com.idstaa.controller.service.ResumeServiceFeignClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
@@ -22,7 +22,9 @@ public class AutoDeliverController {
     @Autowired
     private ResumeServiceFeignClient resumeServiceFeignClient;
 
-    @SentinelResource(value = "findResumeOpenState",blockHandler ="handlerException" )
+    @SentinelResource(value = "findResumeOpenState"
+            ,blockHandlerClass = SentinelHandlersClass.class,blockHandler ="handlerException",
+            fallback ="handleError",fallbackClass = SentinelHandlersClass.class)
     @GetMapping(value = "/checkState/{userId}",produces = { "application/json;charset=UTF-8"})
     public Integer findResumeOpenState(@PathVariable Long userId) {
             /*String url = "http://idstaa-service-resume/resume/openstate/" + userId;
@@ -57,7 +59,5 @@ public class AutoDeliverController {
         return new RestTemplate();
     }
 
-    public Integer handlerException(Long userId, BlockException blockException){
-        return  -100;
-    }
+
 }

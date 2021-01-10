@@ -12,6 +12,7 @@
         <module>idstaa-service-resume-8080</module>
         <module>idstaa-service-resume-8081</module>
         <module>idstaa-service-resume-8082-nacos</module>
+        <module>idstaa-service-resume-8084-nacos-sentinel-dubbo</module>
         <module>idstaa-service-autodeliver-8090</module>
         <module>idstaa-service-autodeliver-8091</module>
         <module>idstaa-cloud-eureka-server-8761</module>
@@ -20,6 +21,7 @@
         <module>idstaa-service-autodeliver-8096</module>
         <module>idstaa-service-autodeliver-8097-nacos</module>
         <module>idstaa-service-autodeliver-8098</module>
+        <module>idstaa-service-autodeliver-8099-nacos-sentinel-dubbo</module>
         <module>idstaa-cloud-configserver-9006</module>
         <module>idstaa-cloud-eureka-server-8762</module>
         <module>idstaa-cloud-stream-producer-9090</module>
@@ -27,6 +29,7 @@
         <module>idstaa-cloud-stream-consumer-9093</module>
         <module>idstaa-cloud-zipkin-server-9411</module>
         <module>idstaa-cloud-oauth-server-9999</module>
+        <module>idstaa-service-dubbo-api</module>
     </modules>
     <!--⽗⼯程打包⽅式为pom-->
     <packaging>pom</packaging>
@@ -88,11 +91,11 @@
             <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
         <!--热部署-->
-        <dependency>
+<!--        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>
             <optional>true</optional>
-        </dependency>
+        </dependency>-->
         <!--引⼊Jaxb，开始-->
         <dependency>
             <groupId>com.sun.xml.bind</groupId>

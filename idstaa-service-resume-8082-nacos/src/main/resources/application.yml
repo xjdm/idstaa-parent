@@ -5,9 +5,9 @@ spring:
     name: idstaa-service-resume
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/lagou?useUnicode=true&characterEncoding=utf8&serverTimezone=UTC
-    username: root
-    password: root
+    url: jdbc:mysql://117.50.4.9:3306/lagou?useUnicode=true&characterEncoding=utf8&serverTimezone=UTC
+    username: idstaa
+    password: Summer!idstaa
   jpa:
     database: MySQL
     show-sql: true
@@ -27,14 +27,6 @@ spring:
         group: DEFAULT_GROUP #默认分组就是DEFAULT_GROUP
         dataid: idstaa-service-resume.yaml
         file-extension: yaml #扩展名
-        ext-config[0]:
-          data-id: abc.yaml
-          group: dev
-          refresh: true #开启扩展dataId的动态刷新
-        ext-config[1]:
-          data-id: def.yaml
-          group: dev
-          refresh: true
   #过滤掉eureka
   autoconfigure:
     exclude: org.springframework.cloud.netflix.eureka.EurekaClientAutoConfiguration
