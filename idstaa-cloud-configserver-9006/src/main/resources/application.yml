@@ -19,7 +19,7 @@ spring:
         git:
           uri: https://gitee.com/xjdm/idstaa-config-repo.git
           username: xjdm #配置git用户名
-          password: XXXX #配置git密码
+          password: cjcj19930817 #配置git密码
           search-paths:
             - idstaa-config-repo
       # 读取分支
